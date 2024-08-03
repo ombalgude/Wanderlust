@@ -22,7 +22,7 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-// const atlasdb_Url = process.env.ATLASDB_URL;
+const atlasdb_Url = process.env.ATLASDB_URL;
 
 main()
   .then(() => {
@@ -43,17 +43,17 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-// const store = MongoStore.create({
-//   mongoUrl: atlasdb_Url,
-//   crypto: {
-//     secret: process.env.SECRET,
-//   },
-//   touchAfter: 24 * 3600,
-// });
+const store = MongoStore.create({
+  mongoUrl: atlasdb_Url,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
 
-// store.on("error", () => {
-//   console.log("ERROR IN MONGO SESSION STORE", err);
-// });
+store.on("error", () => {
+  console.log("ERROR IN MONGO SESSION STORE", err);
+});
 
 const sessionOptions = {
   // store: store,
