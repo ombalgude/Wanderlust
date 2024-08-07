@@ -10,13 +10,13 @@ module.exports.signup = async(req,res) => {
         let {username,email,password} = req.body
     const newUser = new User({email,username})
     const registerUser = await User.register(newUser , password)
-    console.log(registerUser , (err) => {
+    console.log(registerUser)
+    req.login(registerUser , (err) => {
         if(err){
             return next(err)
         }
-        req.login(registerUser)
         req.flash("success" , "Welcome to Wanderlust!")
-        res.redirect(req.session.redirectUrl)
+        res.redirect("/listings")
     })
 
     } catch (e) {

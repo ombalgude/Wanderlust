@@ -33,7 +33,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
+  await mongoose.connect(atlasdb_Url);
 }
 
 app.set("view engine", "ejs");
@@ -48,7 +48,7 @@ const store = MongoStore.create({
   crypto: {
     secret: process.env.SECRET,
   },
-  touchAfter: 24 * 3600,
+  touchAfter: 24 * 3600
 });
 
 store.on("error", () => {
