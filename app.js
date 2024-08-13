@@ -94,6 +94,10 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter); //"reviewRouter & listingRouter" these words are use for requiring the file from route folder soo chack it upward for that
 
+app.get("/" , (req,res) => {
+  res.redirect("/listings")
+ })
+
 // MIDDLEWARE FOR CUSTOM ERROR HANDLING
 app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Someting went wrong" } = err;
